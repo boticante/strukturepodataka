@@ -1,10 +1,10 @@
 /*
 3. Prethodnom zadatku dodati funkcije:
-A. dinamièki dodaje novi element iza odreðenog elementa,
-B. dinamièki dodaje novi element ispred odreðenog elementa,
+A. dinamicki dodaje novi element iza odredenog elementa,
+B. dinamicki dodaje novi element ispred odredenog elementa,
 C. sortira listu po prezimenima osoba,
 D. upisuje listu u datoteku,
-E. èita listu iz datoteke.
+E. cita listu iz datoteke.
 */
 
 #define _CRT_SECURE_NO_WARNINGS

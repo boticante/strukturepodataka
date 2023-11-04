@@ -1,10 +1,10 @@
 /*
 3. Prethodnom zadatku dodati funkcije:
-A. dinamicki dodaje novi element iza odredenog elementa,
-B. dinamicki dodaje novi element ispred odredenog elementa,
+A. dinamički dodaje novi element iza određenog elementa,
+B. dinamički dodaje novi element ispred određenog elementa,
 C. sortira listu po prezimenima osoba,
 D. upisuje listu u datoteku,
-E. cita listu iz datoteke.
+E. čita listu iz datoteke.
 */
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -144,6 +144,25 @@ int insertAtEnd(Position head)
 
 int findPerson(Position head)
 {
+	char surname[MAX_LENGTH] = { 0 };
+
+	if (head == NULL) {
+		printf("Greska!");
+		return NULL;
+	}
+
+	printf("\nUnesi prezime:");
+	scanf(" %s", &surname);
+
+	while (head->next != NULL && strcmp(surname, head->surname) != 0)
+	{
+		head = head->next;
+	}
+
+	if (!strcmp(surname, head->surname))
+		printf("\nOsoba pronadena ->\t ime: %s\t prezime: %s\t godina rodenja: %d\n", head->name, head->surname, head->birthYear);
+	else
+		printf("\nOsoba ne postoji!\n");
 
 	return EXIT_SUCCESS;
 }
@@ -192,6 +211,7 @@ int addAfter(Position head)
 	char afterSurname[MAX_LENGTH];
 	printf("Unesi prezime osobe iza koje zelite dodati novu osobu: ");
 	scanf(" %s", afterSurname);
+	
 	while (head->next != NULL && strcmp(afterSurname, head->surname) != 0)
 	{
 		head = head->next;
@@ -226,6 +246,7 @@ int addBefore(Position head)
 	char beforeSurnamne[MAX_LENGTH];
 	printf("Unesi prezime osobe ispred koje zelite dodati novu osobu: ");
 	scanf(" %s", beforeSurnamne);
+	
 	while (head->next != NULL && strcmp(beforeSurnamne, head->next->surname) != 0)
 	{
 		head = head->next;
@@ -243,7 +264,35 @@ int addBefore(Position head)
 
 int sort(Position head)
 {
+	Position current = NULL;
+	Position previous = NULL;
+	Position temp = NULL;
+	Position last = NULL;
+	
+	while (head->next != last)
+	{
+		previous = head;
+		current = head->next;
+		
+		while (current->next != last)
+		{
+			if (strcmp(current->surname, current->next->surname) > 0)
+			{
+				temp = current->next;
+				previous->next = temp;
+				current->next = temp->next;
+				temp->next = current;
 
+				current = temp;
+			}
+
+			previous = current;
+			current = current->next;
+		}
+		last = current;
+	}
+
+	printf("Lista je sortirana.\n");
 	return EXIT_SUCCESS;
 }
 
@@ -271,6 +320,49 @@ int write(Position head)
 
 int readFromFile(Position head)
 {
+	char filename[MAX_LENGTH];
+	int counter = 0;
+	head->next = NULL;
+	Position P = head;
+	Position q = NULL;
+
+	printf("Unesite ime datoteke iz koje zelite ucitat listu: ");
+	scanf(" %s", &filename);
+	FILE* filePointer = NULL;
+	filePointer = fopen(filename, "r");
 	
+	if (filePointer == NULL)
+	{
+		printf("Greska!\n");
+		return EXIT_FAILURE;
+	}
+
+	while (!feof(filePointer))
+	{
+		if (fgetc(filePointer) == '\n')
+			counter++;
+	}
+	rewind(filePointer);
+	
+	if (counter != 0)
+	{
+		for (int i = 0; i < counter; i++) {
+			q = (Position)malloc(sizeof(struct person));
+			if (q == NULL)
+			{
+				printf("Greska u alokaciji memorije!\n");
+				return EXIT_FAILURE;
+			}
+			fscanf(filePointer, "%s %s %d", q->name, q->surname, &q->birthYear);
+			
+			q->next = P->next;
+			P->next = q;
+			P = P->next;
+		}
+	}
+	fclose(filePointer);
+
+	printf("Lista ucitana iz datoteke.\n");
+
 	return EXIT_SUCCESS;
 }

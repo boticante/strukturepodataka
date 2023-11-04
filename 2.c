@@ -1,10 +1,10 @@
 /*
-2. Definirati strukturu osoba (ime, prezime, godina roðenja) i napisati program koji:
-A. dinamièki dodaje novi element na poèetak liste,
+2. Definirati strukturu osoba (ime, prezime, godina rodenja) i napisati program koji:
+A. dinamicki dodaje novi element na poÃ¨etak liste,
 B. ispisuje listu,
-C. dinamièki dodaje novi element na kraj liste,
+C. dinamicki dodaje novi element na kraj liste,
 D. pronalazi element u listi (po prezimenu),
-E. briše odreðeni element iz liste,
+E. briÅ¡e odredeni element iz liste,
 U zadatku se ne smiju koristiti globalne varijable.
 */
 

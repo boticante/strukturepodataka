@@ -1,10 +1,10 @@
 /*
-2. Definirati strukturu osoba (ime, prezime, godina rodenja) i napisati program koji:
-A. dinamicki dodaje novi element na poèetak liste,
+2. Definirati strukturu osoba (ime, prezime, godina rođenja) i napisati program koji:
+A. dinamički dodaje novi element na početak liste,
 B. ispisuje listu,
-C. dinamicki dodaje novi element na kraj liste,
+C. dinamički dodaje novi element na kraj liste,
 D. pronalazi element u listi (po prezimenu),
-E. briše odredeni element iz liste,
+E. briše određeni element iz liste,
 U zadatku se ne smiju koristiti globalne varijable.
 */
 
@@ -130,6 +130,25 @@ int insertAtEnd(Position head)
 
 int findPerson(Position head) 
 {
+	char surname[MAX_LENGTH] = { 0 };
+
+	if (head == NULL) {
+		printf("Greska!");
+		return NULL;
+	}
+
+	printf("\nUnesi prezime:");
+	scanf(" %s", &surname);
+
+	while (head->next != NULL && strcmp(surname, head->surname) != 0) 
+	{
+		head = head->next;
+	}
+
+	if (!strcmp(surname, head->surname))
+		printf("\nOsoba pronadena ->\t ime: %s\t prezime: %s\t godina rodenja: %d\n", head->name, head->surname, head->birthYear);
+	else
+		printf("\nOsoba ne postoji!\n");
 
 	return EXIT_SUCCESS;
 }

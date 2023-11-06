@@ -39,7 +39,6 @@ int main() {
 int readFromFile(listaPoli P)
 {
     char filename[MAX_LENGTH];
-    int counter = 0;
     P->next = NULL;
 
     printf("Unesite ime datoteke iz koje zelite ucitat polinom: ");

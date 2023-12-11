@@ -37,7 +37,6 @@ int PrintCurrentDirName(StackPosition stackHead);
 
 int ChangeDir(StackPosition currentStack);
 int Push(StackPosition stackHead, Position dir);
-int Pop(StackPosition stackHead);
 
 int main()
 {
@@ -64,10 +63,10 @@ int main()
         case 2:
             ChangeDir(stackHead);
             break;
-        case 3:
-            // change dir to parent (cd ..)
-            Pop(stackHead);
+      /*  case 3:
+                    cd ..
             break;
+        */
         case 4:
             // print dir
             PrintDir(stackHead);
@@ -176,19 +175,5 @@ int Push(StackPosition stackHead, Position dir) {
     newStackElem->dir = dir;
     newStackElem->parent = stackHead->parent;
     stackHead->parent = newStackElem;
-    return 0;
-}
-
-int Pop(StackPosition stackHead)
-{
-    Position currentDir = CurrentDir(stackHead);
-    if (strcmp(currentDir->name, ROOT_DIR_NAME) == 0) {
-        printf("Nalazite se u vrsnom folderu!\n");
-        return 0;
-    }
-
-    StackPosition tmp = stackHead->parent;
-    stackHead->parent = stackHead->parent->parent;
-    free(tmp);
     return 0;
 }

@@ -58,7 +58,7 @@ int main() {
 
     ReadStateFromFile("drzave.txt", states);
 
-    PrintList(states);
+  //  PrintList(states);
 
     Menu(states);
 

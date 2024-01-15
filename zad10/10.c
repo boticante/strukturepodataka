@@ -130,7 +130,7 @@ int ReadStateFromFile(char stateFile[], linkedList states) {
 
     if(!newElement) {
         printf("Greska u alokacjii memorije!\n");
-        return NULL;
+        return 0;
     }
 
     fp = fopen(stateFile, "r");
